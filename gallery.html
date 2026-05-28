@@ -5,15 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Галерея | АРТ-ПОРТФОЛИО</title>
     <style>
-        /* ОБЩИЕ СТИЛИ (те же, что на главной) */
+        /* ОБЩИЕ СТИЛИ - такое же оформление как на главной */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             padding: 0;
-            background-color: #a6a6a6;
             background-attachment: fixed;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://d.zaix.ru/T2mk.png');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative;
         }
-        
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 179, 146, 0.55);
+            backdrop-filter: blur(12px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
         /* КНОПКИ */
         .buttons-container {
             display: flex;
@@ -21,6 +45,8 @@
             gap: 20px;
             margin: 20px 0;
             flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
         }
         .btn {
             display: inline-block;
@@ -30,32 +56,71 @@
             border: none;
             border-radius: 40px;
             cursor: pointer;
-            background-color: #e0e0e0;
+            background-color: #ffd5b5; 
             color: black;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
+            transition: transform 0.2s, background-color 0.2s;
             text-decoration: none;
             text-align: center;
         }
         .btn:hover {
             transform: scale(1.05);
+            background-color: #ff8670;
+        }
+        .btn-active {
+            opacity: 0.7;
+            cursor: default;
+        }
+        .btn-active:hover {
+            transform: none;
+            background-color: #ffd5b5;
         }
 
-        /* ГОРИЗОНТАЛЬНЫЙ БЛОК */
+        /* ГЛАВНЫЙ КОНТЕЙНЕР */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* БОЛЬШОЙ БЛОК */
         .horizontal-block {
-            margin: 0 20px 20px 20px;
+            margin: 0 0 20px 0;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             overflow: hidden;
-            background-color: #fff;
+            position: relative;
+            z-index: 2;
+            background-image: url('https://d.zaix.ru/T2mk.png');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            width: 100%;
         }
+
+        .horizontal-block::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
         .block-content {
+            position: relative;
+            z-index: 2;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 40px;
-            padding: 30px 20px;
+            padding: 50px 30px;
+            width: 100%;
         }
+
+        /* МАСКОТ */
         .block-image {
             margin-bottom: -100px;
             width: 280px;
@@ -64,44 +129,74 @@
             flex-shrink: 0;
             display: block;
         }
+
         .text-group {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             gap: 8px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
         }
+
         .welcome {
             font-size: 1rem;
             font-weight: normal;
-            color: #555;
+            color: #f9f9f9;
             margin: 0;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            background: rgba(0, 0, 0, 0.5);
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 30px;
+            backdrop-filter: blur(3px);
         }
         .site-title {
             font-size: 3.5rem;
             font-weight: bold;
-            color: #222;
+            color: #ffffff;
             margin: 0;
             line-height: 1.1;
-        }
-        .artist-title {
-            font-size: 1.3rem;
-            font-weight: 500;
-            color: #444;
-            margin: 0;
-        }
-        @media (max-width: 700px) {
-            .block-image { margin-left: 0; width: 40%; }
-            .block-content { gap: 20px; padding: 20px; flex-wrap: wrap; }
-            .site-title { font-size: 2rem; }
-            .artist-title { font-size: 1rem; }
+            letter-spacing: -0.5px;
         }
 
-        /* ГАЛЕРЕЯ */
-        .gallery-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
+        @media (max-width: 700px) {
+            .block-image {
+                margin-bottom: 0;
+                width: 40%;
+                min-width: 130px;
+            }
+            .block-content {
+                gap: 20px;
+                padding: 30px 20px;
+                flex-wrap: wrap;
+                text-align: center;
+                justify-content: center;
+            }
+            .text-group {
+                align-items: center;
+                text-align: center;
+            }
+            .site-title {
+                font-size: 2rem;
+            }
+            .welcome {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* КАТЕГОРИИ ГАЛЕРЕИ */
+        .gallery-category {
+            margin-bottom: 50px;
+        }
+        .category-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin: 0 0 20px 0;
+            padding-left: 15px;
+            border-left: 5px solid #ff8c42;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            letter-spacing: 1px;
         }
         .gallery-grid {
             display: grid;
@@ -109,7 +204,7 @@
             gap: 25px;
         }
         .gallery-item {
-            background-color: rgba(255, 255, 255, 0.85);
+            background-color: #ffece1;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
@@ -125,14 +220,16 @@
             aspect-ratio: 1 / 1;
             object-fit: cover;
             display: block;
-            pointer-events: none; /* чтобы клик шёл на родителя .gallery-item */
+            pointer-events: none;
         }
         .gallery-caption {
             padding: 12px;
             text-align: center;
             font-size: 0.9rem;
             color: #111;
-            background-color: rgba(255,255,255,0.9);
+            background-color: rgba(255,236,225,0.95);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            font-weight: 500;
         }
 
         /* ЛАЙТБОКС */
@@ -168,7 +265,7 @@
             z-index: 1001;
         }
         .close-lightbox:hover {
-            color: #ccc;
+            color: #ff8c42;
         }
 
         @media (max-width: 600px) {
@@ -181,58 +278,76 @@
                 right: 20px;
                 font-size: 40px;
             }
+            .category-title {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="buttons-container">
-        <a href="index.html" class="btn">На главную</a>
+        <a href="gallery.html" class="btn btn-active">Галерея</a>
+        <a href="index.html" class="btn">Главное</a>
+        <a href="prices.html" class="btn">Расценки</a>
     </div>
 
-    <div class="horizontal-block">
-        <div class="block-content">
-            <img class="block-image" src="https://f2.toyhou.se/file/f2-toyhou-se/images/111065288_QzpGPoxOpCgbr9l.png" alt="Маскот">
-            <div class="text-group">
-                <p class="welcome">gallery</p>
-                <h1 class="site-title">Мои работы</h1>
+    <div class="main-container">
+        <div class="horizontal-block">
+            <div class="block-content">
+                <img class="block-image" src="https://f2.toyhou.se/file/f2-toyhou-se/images/111065288_QzpGPoxOpCgbr9l.png" alt="Маскот">
+                <div class="text-group">
+                    <p class="welcome">gallery</p>
+                    <h1 class="site-title">Мои работы</h1>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="gallery-container">
-        <div class="gallery-grid">
-            <div class="gallery-item" data-image="https://f2.toyhou.se/file/f2-toyhou-se/images/116567951_Zaiv7fy4pv9MvzT.png">
-                <img src="https://f2.toyhou.se/file/f2-toyhou-se/images/116567951_Zaiv7fy4pv9MvzT.png" alt="Работа 1">
-                <div class="gallery-caption">Работа 1</div>
+        <!-- КАТЕГОРИЯ: БЮСТ -->
+        <div class="gallery-category">
+            <h2 class="category-title">Бюст</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" data-image="https://d.zaix.ru/T2oJ.png">
+                    <img src="https://d.zaix.ru/T2oJ.png" alt="Бюст работа 1">
+                </div>
+                <div class="gallery-item" data-image="https://e.radikal.host/2026/05/28/34243253535325.png">
+                    <img src="https://e.radikal.host/2026/05/28/34243253535325.png" alt="Бюст работа 2">
+                </div>
+                <div class="gallery-item" data-image="https://e.radikal.host/2026/05/28/IZOBRAZENIE_2026-05-28_232248488.png">
+                    <img src="https://e.radikal.host/2026/05/28/IZOBRAZENIE_2026-05-28_232248488.png" alt="Бюст работа 3">
+                </div>
             </div>
-            <div class="gallery-item" data-image="https://f2.toyhou.se/file/f2-toyhou-se/images/114552385_hRNYjn0ub1pNFCL.png">
-                <img src="https://f2.toyhou.se/file/f2-toyhou-se/images/114552385_hRNYjn0ub1pNFCL.png" alt="Работа 2">
-                <div class="gallery-caption">Работа 2</div>
+        </div>
+
+        <!-- КАТЕГОРИЯ: ПОЛТЕЛА -->
+        <div class="gallery-category">
+            <h2 class="category-title">Полтело</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" data-image="https://e.radikal.host/2026/05/28/Illustration3.png">
+                    <img src="https://e.radikal.host/2026/05/28/Illustration3.png" alt="Полтела работа 1">
+                </div>
+                <div class="gallery-item" data-image="https://f2.toyhou.se/file/f2-toyhou-se/images/110639207_weGu9ttHFxSkk1m.png">
+                    <img src="https://f2.toyhou.se/file/f2-toyhou-se/images/110639207_weGu9ttHFxSkk1m.png" alt="Полтела работа 2">
+                </div>
+                <div class="gallery-item" data-image="https://f2.toyhou.se/file/f2-toyhou-se/images/107737517_HfgnLPGPn515bLY.png">
+                    <img src="https://f2.toyhou.se/file/f2-toyhou-se/images/107737517_HfgnLPGPn515bLY.png" alt="Полтела работа 3">
+                </div>
             </div>
-            <div class="gallery-item" data-image="https://f2.toyhou.se/file/f2-toyhou-se/images/115120041_7gfXXByOpXpuvRt.png">
-                <img src="https://f2.toyhou.se/file/f2-toyhou-se/images/115120041_7gfXXByOpXpuvRt.png" alt="Работа 3">
-                <div class="gallery-caption">Работа 3</div>
-            </div>
-            <div class="gallery-item" data-image="https://f2.toyhou.se/file/f2-toyhou-se/images/110639207_weGu9ttHFxSkk1m.png">
-                <img src="https://f2.toyhou.se/file/f2-toyhou-se/images/110639207_weGu9ttHFxSkk1m.png" alt="Работа 4">
-                <div class="gallery-caption">Работа 4</div>
-            </div>
-            <div class="gallery-item" data-image="https://f2.toyhou.se/file/f2-toyhou-se/images/109547111_w1hz1tyMi7B6FAi.png">
-                <img src="https://f2.toyhou.se/file/f2-toyhou-se/images/109547111_w1hz1tyMi7B6FAi.png" alt="Работа 5">
-                <div class="gallery-caption">Работа 5</div> 
-            </div>
-            <div class="gallery-item" data-image="https://f2.toyhou.se/file/f2-toyhou-se/images/108711712_cQ0sHUx7B8r5LvD.png">
-                <img src="https://f2.toyhou.se/file/f2-toyhou-se/images/108711712_cQ0sHUx7B8r5LvD.png" alt="Работа 6">
-                <div class="gallery-caption">Работа 6</div>
-            </div>
-            <div class="gallery-item" data-image="https://f2.toyhou.se/file/f2-toyhou-se/images/107737517_HfgnLPGPn515bLY.png">
-                <img src="https://f2.toyhou.se/file/f2-toyhou-se/images/107737517_HfgnLPGPn515bLY.png" alt="Работа 7">
-                <div class="gallery-caption">Работа 7</div>
-            </div>
-            <div class="gallery-item" data-image="КАРТИНКА">
-                <img src="КАРТИНКА" alt="Работа 8">
-                <div class="gallery-caption">здесь будет еще одна картинка</div>
+        </div>
+
+        <!-- КАТЕГОРИЯ: ПОЛНЫЙ РОСТ -->
+        <div class="gallery-category">
+            <h2 class="category-title">Полный рост</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" data-image="https://f2.toyhou.se/file/f2-toyhou-se/images/116567951_Zaiv7fy4pv9MvzT.png">
+                    <img src="https://f2.toyhou.se/file/f2-toyhou-se/images/116567951_Zaiv7fy4pv9MvzT.png" alt="Полный рост работа 1">
+                </div>
+                <div class="gallery-item" data-image="https://f2.toyhou.se/file/f2-toyhou-se/images/114552385_hRNYjn0ub1pNFCL.png">
+                    <img src="https://f2.toyhou.se/file/f2-toyhou-se/images/114552385_hRNYjn0ub1pNFCL.png" alt="Полный рост работа 2">
+                </div>
+                <div class="gallery-item" data-image="https://f2.toyhou.se/file/f2-toyhou-se/images/109547111_w1hz1tyMi7B6FAi.png">
+                    <img src="https://f2.toyhou.se/file/f2-toyhou-se/images/109547111_w1hz1tyMi7B6FAi.png" alt="Полный рост работа 3">
+                </div>
             </div>
         </div>
     </div>
@@ -251,26 +366,23 @@
 
         galleryItems.forEach(item => {
             item.addEventListener('click', function(e) {
-                const fullImageUrl = this.getAttribute('data-image'); // url для увеличения картинки
+                const fullImageUrl = this.getAttribute('data-image');
                 lightboxImg.src = fullImageUrl;
                 lightbox.style.display = 'flex';
             });
         });
 
-        // закрытие лайтбокса по клику на крестик или на фон
         function closeLightboxFunc() {
             lightbox.style.display = 'none';
-            lightboxImg.src = ''; // очищаем, чтобы при закрытии не висело
+            lightboxImg.src = '';
         }
         closeLightbox.addEventListener('click', closeLightboxFunc);
         lightbox.addEventListener('click', function(e) {
-            // если кликнули на фон
             if (e.target === lightbox) {
                 closeLightboxFunc();
             }
         });
 
-        // Закрытие по клавише ESC
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && lightbox.style.display === 'flex') {
                 closeLightboxFunc();
@@ -278,4 +390,5 @@
         });
     </script>
 </body>
+</html>
 </html>
