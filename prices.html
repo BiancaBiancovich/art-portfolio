@@ -122,10 +122,10 @@
 
         /* МАСКОТ */
         .block-image {
-            margin-bottom: -100px;
-            width: 280px;
+            margin-bottom: -50px;
+            width: 460px;
             height: auto;
-            border-radius: 12px;
+            border-radius: 5px;
             flex-shrink: 0;
             display: block;
         }
@@ -281,7 +281,7 @@
     <div class="main-container">
         <div class="horizontal-block">
             <div class="block-content">
-                <img class="block-image" src="https://f2.toyhou.se/file/f2-toyhou-se/images/111065288_QzpGPoxOpCgbr9l.png" alt="Маскот">
+                <img class="block-image" src="https://e.radikal.host/2026/05/29/Illustration4444444444444.png" alt="Маскот">
                 <div class="text-group">
                     <p class="welcome">прайс-лист</p>
                     <h1 class="site-title">Услуги и цены</h1>
@@ -341,4 +341,27 @@
     </div>
 
 </body>
+
+<div class="fixed-bottom" style="position: fixed; bottom: 20px; right: 20px; z-index: 999;">
+    <a target="_blank">
+        <img src="https://e.radikal.host/2026/05/29/59946932_WsRaRKab7bAck5C125a7639edea78fe.png"
+        alt="pagedoll" style="max-width: 150px; display: block; animation: spin 3s linear infinite; cursor: pointer; transition: transform 0.3s;">
+    </a>
+</div>
+
+<style>
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    
+    .fixed-bottom a:hover img {
+        animation: spin 1s linear infinite;
+    }
+</style>
+
 </html>
